@@ -1,0 +1,40 @@
+﻿@page
+@model Logs.Pages.CreateEventModel
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <form method="post" class="needs-validation p-4 border rounded bg-light" style="max-width: 500px; width: 100%;" novalidate>
+        <div class="form-group">
+            <label for="Fecha">Fecha</label>
+            <input type="datetime-local" asp-for="EventLog.Fecha" class="form-control" id="Fecha" required />
+            <span asp-validation-for="EventLog.Fecha" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Descripcion">Descripción</label>
+            <input type="text" asp-for="EventLog.Descripcion" class="form-control" id="Descripcion" required />
+            <span asp-validation-for="EventLog.Descripcion" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="TipoEvento">Tipo de Evento</label>
+            <input type="text" asp-for="EventLog.TipoEvento" class="form-control" id="TipoEvento" required />
+            <span asp-validation-for="EventLog.TipoEvento" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Registrar Evento</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const dateInput = document.querySelector('input[type="datetime-local"]');
+            if (dateInput && dateInput.value) {
+                const dateValue = new Date(dateInput.value);
+
+                // Convertir la fecha a formato ISO sin segundos (YYYY-MM-DDTHH:MM)
+                const formattedDate = dateValue.toISOString().slice(0, 16);
+                dateInput.value = formattedDate;
+            }
+        });
+    });
+</script>

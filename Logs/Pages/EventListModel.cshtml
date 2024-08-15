@@ -1,0 +1,48 @@
+﻿@page
+@model Logs.Pages.EventListModel
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+
+<div class="container mt-5">
+    <h2>Consulta de Eventos Registrados</h2>
+    <form method="get">
+        <div class="form-group">
+            <label for="TipoEvento">Tipo de Evento</label>
+            <select asp-for="FilterTipoEvento" class="form-control" asp-items="Model.TipoEventoOptions">
+                <option value="">Todos</option>
+                <option value="Api">Api</option>
+                <option value="Formulario">Formulario</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="FechaInicio">Fecha Inicio</label>
+            <input type="date" asp-for="FilterFechaInicio" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="FechaFin">Fecha Fin</label>
+            <input type="date" asp-for="FilterFechaFin" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </form>
+
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Descripción</th>
+                <th>Tipo de Evento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evento in Model.Eventos)
+            {
+                <tr>
+                    <td>@evento.Fecha</td>
+                    <td>@evento.Descripcion</td>
+                    <td>@evento.TipoEvento</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
