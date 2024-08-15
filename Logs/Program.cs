@@ -9,6 +9,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<Logs.Data.ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+// Agregar servicios de controladores y Razor Pages
+builder.Services.AddControllers();
+builder.Services.AddRazorPages();
+
 
 // Configurar Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
